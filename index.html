@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="be">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МІРЫЯДА — Між намі</title>
+    <meta name="description" content="Мірыяда — музычны праект. Альбом «Між намі». Электроніка, фрык фолк, idm.">
+    <meta property="og:title" content="МІРЫЯДА — Між намі">
+    <meta property="og:description" content="Музыка пасля чалавецтва.">
+    <meta property="og:image" content="https://leplik.github.io/miryyada-site/cover.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ice-blue: #7eb8d4;
+            --ice-light: #a8d8ea;
+            --ice-glow: #4a9ebb;
+            --deep-space: #050a12;
+            --space-dark: #0a1020;
+            --text-primary: #e0e8f0;
+            --text-secondary: #8899aa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-space);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stars::before,
+        .stars::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(126, 184, 212, 0.6), transparent),
+                radial-gradient(1px 1px at 30% 65%, rgba(168, 216, 234, 0.4), transparent),
+                radial-gradient(1.5px 1.5px at 50% 10%, rgba(126, 184, 212, 0.7), transparent),
+                radial-gradient(1px 1px at 70% 40%, rgba(168, 216, 234, 0.3), transparent),
+                radial-gradient(1px 1px at 90% 80%, rgba(126, 184, 212, 0.5), transparent),
+                radial-gradient(1.5px 1.5px at 15% 90%, rgba(168, 216, 234, 0.4), transparent),
+                radial-gradient(1px 1px at 45% 50%, rgba(126, 184, 212, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 15%, rgba(168, 216, 234, 0.5), transparent),
+                radial-gradient(1px 1px at 60% 75%, rgba(126, 184, 212, 0.4), transparent),
+                radial-gradient(1.5px 1.5px at 25% 35%, rgba(168, 216, 234, 0.3), transparent),
+                radial-gradient(1px 1px at 95% 55%, rgba(126, 184, 212, 0.6), transparent),
+                radial-gradient(1px 1px at 5% 60%, rgba(168, 216, 234, 0.4), transparent),
+                radial-gradient(1px 1px at 35% 85%, rgba(126, 184, 212, 0.3), transparent),
+                radial-gradient(1.5px 1.5px at 75% 95%, rgba(168, 216, 234, 0.5), transparent),
+                radial-gradient(1px 1px at 55% 30%, rgba(126, 184, 212, 0.4), transparent);
+        }
+
+        .stars::after {
+            background-image:
+                radial-gradient(1px 1px at 20% 45%, rgba(126, 184, 212, 0.5), transparent),
+                radial-gradient(1px 1px at 40% 88%, rgba(168, 216, 234, 0.3), transparent),
+                radial-gradient(1px 1px at 65% 55%, rgba(126, 184, 212, 0.4), transparent),
+                radial-gradient(1.5px 1.5px at 85% 25%, rgba(168, 216, 234, 0.6), transparent),
+                radial-gradient(1px 1px at 8% 78%, rgba(126, 184, 212, 0.3), transparent),
+                radial-gradient(1px 1px at 48% 92%, rgba(168, 216, 234, 0.4), transparent),
+                radial-gradient(1px 1px at 72% 8%, rgba(126, 184, 212, 0.5), transparent),
+                radial-gradient(1.5px 1.5px at 33% 42%, rgba(168, 216, 234, 0.3), transparent),
+                radial-gradient(1px 1px at 88% 68%, rgba(126, 184, 212, 0.4), transparent),
+                radial-gradient(1px 1px at 18% 12%, rgba(168, 216, 234, 0.5), transparent);
+            animation: twinkle 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 48px 20px;
+        }
+
+        /* Photo */
+        .photo-wrapper {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .photo-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74, 158, 187, 0.3), transparent 70%);
+            filter: blur(14px);
+            animation: glow-pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-pulse {
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.06); }
+        }
+
+        .photo {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(126, 184, 212, 0.25);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Title */
+        .title {
+            font-size: 44px;
+            font-weight: 300;
+            letter-spacing: 16px;
+            text-transform: uppercase;
+            color: var(--ice-light);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 5px;
+            color: var(--text-secondary);
+            text-transform: lowercase;
+            margin-bottom: 36px;
+            text-align: center;
+        }
+
+        /* Divider line */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--ice-blue), transparent);
+            margin-bottom: 32px;
+        }
+
+        /* Album cover */
+        .album-cover-wrapper {
+            margin-bottom: 16px;
+        }
+
+        .album-cover {
+            width: 280px;
+            height: 280px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(126, 184, 212, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 60px rgba(74, 158, 187, 0.08);
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Album section */
+        .album-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .album-title {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* Description */
+        .description {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            text-align: center;
+            max-width: 380px;
+            line-height: 1.7;
+        }
+
+        .description .accent {
+            color: var(--ice-blue);
+            font-weight: 400;
+        }
+
+        /* Streaming links */
+        .streaming-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 36px;
+        }
+
+        .streaming-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 24px;
+            border: 1px solid rgba(126, 184, 212, 0.12);
+            border-radius: 8px;
+            background: rgba(10, 16, 32, 0.6);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .streaming-link:hover {
+            border-color: rgba(126, 184, 212, 0.4);
+            background: rgba(126, 184, 212, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .streaming-link svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Divider 2 */
+        .divider-small {
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(126, 184, 212, 0.3), transparent);
+            margin-bottom: 28px;
+        }
+
+        /* Social links */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(126, 184, 212, 0.12);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: rgba(126, 184, 212, 0.4);
+            color: var(--ice-blue);
+            background: rgba(126, 184, 212, 0.05);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            font-size: 11px;
+            color: rgba(136, 153, 170, 0.3);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 30px;
+                letter-spacing: 10px;
+            }
+
+            .photo {
+                width: 140px;
+                height: 140px;
+            }
+
+            .album-cover {
+                width: 240px;
+                height: 240px;
+            }
+
+            .streaming-links {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <!-- Photo -->
+        <div class="photo-wrapper">
+            <div class="photo-glow"></div>
+            <div class="photo">
+                <img src="myfoto.jpeg" alt="Мірыяда" onerror="this.parentElement.style.background='linear-gradient(135deg, #0a1a2e, #0d2240, #0a1a2e)'; this.style.display='none';">
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="title">Мірыяда</h1>
+        <p class="subtitle">музыка пасля чалавецтва</p>
+
+        <div class="divider"></div>
+
+        <!-- Album Cover -->
+        <div class="album-cover-wrapper">
+            <div class="album-cover">
+                <img src="cover.jpg" alt="Між намі — вокладка альбома">
+            </div>
+        </div>
+
+        <!-- Album info -->
+        <p class="album-label">Альбом</p>
+        <h2 class="album-title">Між намі</h2>
+
+        <!-- Description -->
+        <p class="description">
+            Першы беларускамоўны альбом, створаны з дапамогай <span class="accent">ШІ</span>.<br>
+            Тэксты — мае. Музыка і вакал — штучны інтэлект.<br>
+            Электроніка, фрык фолк, idm.
+        </p>
+
+        <!-- Streaming Links -->
+        <div class="streaming-links">
+            <!-- Spotify -->
+            <a href="https://open.spotify.com/album/2W6k8cGcUBCMdkfGVNHmRb" class="streaming-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+                Spotify
+            </a>
+
+            <!-- Apple Music -->
+            <a href="https://music.apple.com/us/album/%D0%BC%D1%96%D0%B6-%D0%BD%D0%B0%D0%BC%D1%96/1873763550" class="streaming-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.877-.726 10.496 10.496 0 0 0-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.803.37.11.75.164 1.13.202.577.055 1.155.074 1.733.074h11.286c.22 0 .44 0 .66-.01.57-.03 1.14-.07 1.694-.218 1.49-.39 2.603-1.276 3.278-2.672.262-.542.376-1.12.452-1.71.06-.478.09-.96.1-1.442V6.124zm-6.924 5.39c-.01 2.39-.006 4.778-.016 7.168 0 .31-.035.62-.108.923-.2.876-.728 1.432-1.596 1.675-.445.127-.905.18-1.37.17-.584-.01-1.12-.15-1.555-.543-.43-.39-.62-.882-.58-1.444.07-.98.64-1.63 1.53-1.942.364-.13.744-.2 1.12-.27.378-.07.76-.124 1.13-.22.3-.08.506-.28.574-.586.036-.15.05-.3.05-.453V9.95c0-.26-.09-.41-.34-.46l-.015-.003c-.32-.065-.64-.12-.96-.184l-3.01-.6c-.27-.053-.54-.108-.81-.157-.14-.024-.24.02-.3.15-.03.06-.04.13-.04.2v8.15l.002.51c0 .32-.035.637-.108.95-.2.84-.693 1.402-1.52 1.665-.46.146-.93.2-1.41.2-.478 0-.93-.08-1.34-.32-.593-.34-.9-.86-.9-1.54.01-.97.63-1.67 1.54-1.97.38-.12.77-.19 1.16-.27.34-.07.68-.12 1.01-.21.37-.1.58-.36.63-.74.02-.12.02-.24.02-.37V7.67c0-.33.07-.63.33-.86.17-.16.38-.24.61-.28.2-.03.4 0 .59.04l5.43 1.08.48.1c.36.07.57.3.6.67v.002c.01.06.01.12.01.18v3.12z"/>
+                </svg>
+                Apple Music
+            </a>
+
+            <!-- YouTube Music -->
+            <a href="https://music.youtube.com/playlist?list=OLAK5uy_mR7neJO7fRzMBtIWVSJezwh57BLTTOe2I" class="streaming-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L16.2 12l-6.516 3.54z"/>
+                </svg>
+                YouTube Music
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/channel/UCJqNjFe47k2RSsuYX-EXPLQ" class="streaming-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+        </div>
+
+        <div class="divider-small"></div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/miryyada/" class="social-link" target="_blank" rel="noopener" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@miriady0" class="social-link" target="_blank" rel="noopener" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.87a8.28 8.28 0 0 0 4.84 1.55V6.97a4.84 4.84 0 0 1-1.08-.28z"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <p class="footer">&copy; Aliaksei Smirnou, 2026</p>
+    </div>
+</body>
+</html>
