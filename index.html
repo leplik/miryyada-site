@@ -576,18 +576,19 @@
     <script>
       // TikTok Pixel: ViewContent on page load
       ttq.track('ViewContent', {
-        content_id: 'mizh-nami-album',
-        content_name: 'Між намі',
-        content_type: 'music_album'
+        content_ids: ['mizh-nami-album'],
+        content_type: 'product',
+        description: 'Між намі — электроніка, фрык фолк, idm',
+        quantity: 1
       });
 
       // TikTok Pixel: ClickButton on streaming link clicks
       document.querySelectorAll('.streaming-link').forEach(function(link) {
         link.addEventListener('click', function() {
+          var name = this.textContent.trim().toLowerCase().replace(/\s+/g, '-');
           ttq.track('ClickButton', {
-            content_id: 'mizh-nami-' + this.textContent.trim().toLowerCase().replace(/\s+/g, '-'),
-            content_name: this.textContent.trim(),
-            content_type: 'streaming_link'
+            content_ids: ['mizh-nami-' + name],
+            description: this.textContent.trim()
           });
         });
       });
