@@ -576,6 +576,7 @@
     <script>
       // TikTok Pixel: ViewContent on page load
       ttq.track('ViewContent', {
+        content_id: 'mizh-nami-album',
         content_name: 'Між намі',
         content_type: 'music_album'
       });
@@ -584,6 +585,7 @@
       document.querySelectorAll('.streaming-link').forEach(function(link) {
         link.addEventListener('click', function() {
           ttq.track('ClickButton', {
+            content_id: 'mizh-nami-' + this.textContent.trim().toLowerCase().replace(/\s+/g, '-'),
             content_name: this.textContent.trim(),
             content_type: 'streaming_link'
           });
